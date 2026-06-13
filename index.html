@@ -54,72 +54,42 @@
             overflow: hidden;
             transition: background 0.3s, color 0.3s;
         }
-        /* ===== 侧边栏 ===== */
         .sidebar {
-            width: 260px;
-            min-width: 260px;
+            width: 260px; min-width: 260px;
             background: var(--sidebar-bg);
             border-right: 1px solid var(--border);
-            display: flex;
-            flex-direction: column;
-            flex-shrink: 0;
-            overflow-y: auto;
-            transition: transform 0.3s, background 0.3s;
-            z-index: 20;
+            display: flex; flex-direction: column; flex-shrink: 0;
+            overflow-y: auto; transition: transform 0.3s, background 0.3s; z-index: 20;
         }
         .sidebar-header {
-            padding: 12px 14px;
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            background: var(--sidebar-bg);
-            z-index: 1;
+            padding: 12px 14px; border-bottom: 1px solid var(--border);
+            display: flex; justify-content: space-between; align-items: center;
+            position: sticky; top: 0; background: var(--sidebar-bg); z-index: 1;
         }
         .sidebar-header h3 { font-size: 16px; font-weight: 600; }
         .new-chat-btn {
-            background: #1a73e8;
-            border: none;
-            color: white;
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            font-size: 20px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            background: #1a73e8; border: none; color: white;
+            width: 32px; height: 32px; border-radius: 50%;
+            font-size: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center;
         }
         .chat-list { flex: 1; overflow-y: auto; padding: 6px; }
         .chat-item {
-            padding: 10px 12px;
-            margin: 3px 0;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 14px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            word-break: break-word;
+            padding: 10px 12px; margin: 3px 0; border-radius: 8px;
+            cursor: pointer; font-size: 14px; display: flex;
+            justify-content: space-between; align-items: center; word-break: break-word;
         }
         .chat-item:hover { background: var(--btn-hover); }
         .chat-item.active { background: #e3f2fd; font-weight: 500; }
         .dark-mode .chat-item.active { background: #1a3a5c; }
         .chat-item .delete-chat {
-            visibility: hidden;
-            background: none; border: none; color: #999;
+            visibility: hidden; background: none; border: none; color: #999;
             font-size: 16px; cursor: pointer; padding: 0 4px; line-height: 1;
         }
         .chat-item:hover .delete-chat { visibility: visible; }
         .chat-item .delete-chat:hover { color: #e53935; }
         .sidebar-footer {
-            border-top: 1px solid var(--border);
-            padding: 6px;
-            position: sticky;
-            bottom: 0;
-            background: var(--sidebar-bg);
+            border-top: 1px solid var(--border); padding: 6px;
+            position: sticky; bottom: 0; background: var(--sidebar-bg);
         }
         .sidebar-footer button {
             display: block; width: 100%; padding: 9px 10px; margin: 3px 0;
@@ -128,7 +98,6 @@
         }
         .sidebar-footer button:hover { background: var(--btn-hover); }
 
-        /* ===== 主区域 ===== */
         .main {
             flex: 1; display: flex; flex-direction: column; background: var(--main-bg);
             min-width: 0; position: relative; transition: background 0.3s;
@@ -139,16 +108,14 @@
             opacity: 0.15; filter: blur(2px); z-index: 0; pointer-events: none;
         }
         .chat-header {
-            padding: 10px 14px;
-            border-bottom: 1px solid var(--border);
+            padding: 10px 14px; border-bottom: 1px solid var(--border);
             font-size: 14px; font-weight: 500; color: var(--text-secondary);
             display: flex; justify-content: space-between; align-items: center;
             position: relative; z-index: 1; background: var(--main-bg);
         }
         .menu-toggle {
-            display: none;
-            background: none; border: none; font-size: 22px; cursor: pointer;
-            color: var(--text); padding: 0 6px;
+            display: none; background: none; border: none;
+            font-size: 22px; cursor: pointer; color: var(--text); padding: 0 6px;
         }
         .export-btn {
             background: transparent; border: 1px solid var(--input-border);
@@ -167,13 +134,34 @@
             display: flex; flex-direction: column; gap: 12px;
             position: relative; z-index: 1;
         }
+        .message-wrapper {
+            display: flex; flex-direction: column; position: relative;
+        }
+        .message-wrapper.user-wrapper { align-items: flex-end; }
+        .message-wrapper.assistant-wrapper { align-items: flex-start; }
         .msg {
             max-width: 85%; padding: 10px 14px; border-radius: 16px;
             line-height: 1.5; font-size: 14px; word-break: break-word; white-space: pre-wrap;
         }
-        .user { align-self: flex-end; background: var(--user-bg); color: var(--user-color); border-bottom-right-radius: 4px; }
-        .assistant { align-self: flex-start; background: var(--ai-bg); color: var(--ai-color); border-bottom-left-radius: 4px; }
+        .user-msg { background: var(--user-bg); color: var(--user-color); border-bottom-right-radius: 4px; cursor: pointer; }
+        .assistant-msg { background: var(--ai-bg); color: var(--ai-color); border-bottom-left-radius: 4px; }
         .role-bubble { border-left: 3px solid; }
+        .msg-actions {
+            display: flex; gap: 4px; margin-top: 2px; opacity: 0; transition: opacity 0.2s;
+        }
+        .message-wrapper:hover .msg-actions { opacity: 1; }
+        .msg-action-btn {
+            background: none; border: 1px solid var(--input-border);
+            color: var(--text-secondary); padding: 2px 8px;
+            border-radius: 10px; cursor: pointer; font-size: 11px;
+        }
+        .msg-action-btn:hover { background: var(--btn-hover); }
+        .msg-edit-input {
+            width: 100%; max-width: 85%; padding: 8px 12px;
+            border: 1px solid #1a73e8; border-radius: 14px;
+            font-size: 14px; font-family: inherit; resize: none;
+            background: var(--main-bg); color: var(--text);
+        }
         .input-area {
             display: flex; align-items: flex-end; gap: 6px;
             padding: 10px 14px; border-top: 1px solid var(--border);
@@ -196,12 +184,8 @@
             background: rgba(0,0,0,0.4); z-index: 15;
         }
 
-        /* ===== 手机适配 ===== */
         @media (max-width: 768px) {
-            .sidebar {
-                position: fixed; top: 0; left: 0; height: 100%;
-                transform: translateX(-100%);
-            }
+            .sidebar { position: fixed; top: 0; left: 0; height: 100%; transform: translateX(-100%); }
             .sidebar.open { transform: translateX(0); }
             .sidebar-overlay.show { display: block; }
             .menu-toggle { display: inline-block; }
@@ -211,9 +195,9 @@
             .input-area { padding: 8px 10px; }
             #user-input { font-size: 13px; padding: 8px 12px; }
             .send-btn { width: 38px; height: 38px; font-size: 16px; }
+            .msg-actions { opacity: 1; }
         }
 
-        /* ===== 弹窗（手机弹窗全屏） ===== */
         .overlay {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: var(--overlay-bg); justify-content: center; align-items: center; z-index: 100;
@@ -254,10 +238,8 @@
     </style>
 </head>
 <body>
-    <!-- 侧边栏遮罩（手机用） -->
     <div class="sidebar-overlay" id="sidebar-overlay" onclick="closeSidebar()"></div>
 
-    <!-- 左侧边栏 -->
     <div class="sidebar" id="sidebar">
         <div class="sidebar-header">
             <h3>🎭 听澜</h3>
@@ -278,7 +260,6 @@
         </div>
     </div>
 
-    <!-- 右侧主区域 -->
     <div class="main">
         <div class="chat-bg-layer" id="chat-bg-layer"></div>
         <div class="chat-header">
@@ -297,139 +278,38 @@
         </div>
     </div>
 
-    <!-- 弹窗：用户角色卡 -->
+    <!-- 弹窗内容与之前版本相同，此处省略但实际代码必须完整保留 -->
     <div class="overlay" id="user-card-overlay">
-        <div class="dialog-box">
-            <h3>👤 我的角色设定</h3>
-            <div class="form-group"><label>姓名</label><input id="user-name"></div>
-            <div class="form-group"><label>性别</label><input id="user-gender"></div>
-            <div class="form-group"><label>年龄</label><input id="user-age"></div>
-            <div class="form-group"><label>性格</label><textarea id="user-personality"></textarea></div>
-            <div class="form-group"><label>外貌描述</label><textarea id="user-appearance"></textarea></div>
-            <div class="form-group"><label>与 AI 角色的关系</label><textarea id="user-relation"></textarea></div>
-            <div class="form-group"><label>其他补充设定</label><textarea id="user-extra"></textarea></div>
-            <div>
-                <button class="btn-primary" onclick="saveUserCard()">保存</button>
-                <button class="btn-secondary" onclick="closeOverlay('user-card-overlay')">取消</button>
-                <button class="btn-danger" onclick="clearUserCard()">清除</button>
-            </div>
-        </div>
+        <div class="dialog-box"><h3>👤 我的角色设定</h3><div class="form-group"><label>姓名</label><input id="user-name"></div><div class="form-group"><label>性别</label><input id="user-gender"></div><div class="form-group"><label>年龄</label><input id="user-age"></div><div class="form-group"><label>性格</label><textarea id="user-personality"></textarea></div><div class="form-group"><label>外貌描述</label><textarea id="user-appearance"></textarea></div><div class="form-group"><label>与 AI 角色的关系</label><textarea id="user-relation"></textarea></div><div class="form-group"><label>其他补充设定</label><textarea id="user-extra"></textarea></div><div><button class="btn-primary" onclick="saveUserCard()">保存</button><button class="btn-secondary" onclick="closeOverlay('user-card-overlay')">取消</button><button class="btn-danger" onclick="clearUserCard()">清除</button></div></div>
     </div>
-    <!-- 弹窗：AI角色卡 -->
     <div class="overlay" id="character-card-overlay">
-        <div class="dialog-box">
-            <h3>🪪 AI 角色卡设定</h3>
-            <div class="form-group"><label>姓名</label><input id="char-name"></div>
-            <div class="form-group"><label>性别</label><input id="char-gender"></div>
-            <div class="form-group"><label>年龄</label><input id="char-age"></div>
-            <div class="form-group"><label>性格</label><textarea id="char-personality"></textarea></div>
-            <div class="form-group"><label>外貌</label><textarea id="char-appearance"></textarea></div>
-            <div class="form-group"><label>对用户的感情态度</label><textarea id="char-attitude"></textarea></div>
-            <div class="form-group"><label>人格底线</label><textarea id="char-bottom-line"></textarea></div>
-            <div class="form-group"><label>其他补充设定</label><textarea id="char-extra"></textarea></div>
-            <div>
-                <button class="btn-primary" onclick="saveCharacterCard()">保存</button>
-                <button class="btn-secondary" onclick="closeOverlay('character-card-overlay')">取消</button>
-                <button class="btn-danger" onclick="clearCharacterCard()">清除</button>
-                <button class="btn-outline" onclick="saveCardAsTemplate()">💾 保存为模板</button>
-            </div>
-        </div>
+        <div class="dialog-box"><h3>🪪 AI 角色卡设定</h3><div class="form-group"><label>姓名</label><input id="char-name"></div><div class="form-group"><label>性别</label><input id="char-gender"></div><div class="form-group"><label>年龄</label><input id="char-age"></div><div class="form-group"><label>性格</label><textarea id="char-personality"></textarea></div><div class="form-group"><label>外貌</label><textarea id="char-appearance"></textarea></div><div class="form-group"><label>对用户的感情态度</label><textarea id="char-attitude"></textarea></div><div class="form-group"><label>人格底线</label><textarea id="char-bottom-line"></textarea></div><div class="form-group"><label>其他补充设定</label><textarea id="char-extra"></textarea></div><div><button class="btn-primary" onclick="saveCharacterCard()">保存</button><button class="btn-secondary" onclick="closeOverlay('character-card-overlay')">取消</button><button class="btn-danger" onclick="clearCharacterCard()">清除</button><button class="btn-outline" onclick="saveCardAsTemplate()">💾 保存为模板</button></div></div>
     </div>
-    <!-- 弹窗：写作要求 -->
     <div class="overlay" id="writing-req-overlay">
-        <div class="dialog-box">
-            <h3>📝 写作要求</h3>
-            <textarea id="writing-req-input" style="width:100%;height:100px;"></textarea>
-            <div>
-                <button class="btn-primary" onclick="saveWritingReq()">保存</button>
-                <button class="btn-secondary" onclick="closeOverlay('writing-req-overlay')">取消</button>
-                <button class="btn-danger" onclick="clearWritingReq()">清除</button>
-            </div>
-        </div>
+        <div class="dialog-box"><h3>📝 写作要求</h3><textarea id="writing-req-input" style="width:100%;height:100px;"></textarea><div><button class="btn-primary" onclick="saveWritingReq()">保存</button><button class="btn-secondary" onclick="closeOverlay('writing-req-overlay')">取消</button><button class="btn-danger" onclick="clearWritingReq()">清除</button></div></div>
     </div>
-    <!-- 弹窗：背景设置 -->
     <div class="overlay" id="bg-settings-overlay">
-        <div class="dialog-box">
-            <h3>🖼️ 聊天背景设置</h3>
-            <input type="file" id="bg-file-input" accept="image/*" style="display:none;" onchange="handleBgFileSelect(event)">
-            <div class="bg-preview" id="bg-preview">暂无背景</div>
-            <button class="btn-outline" onclick="document.getElementById('bg-file-input').click()">📁 选择图片</button>
-            <button class="btn-danger" onclick="removeBackground()" style="margin-left:6px;">移除背景</button>
-            <div class="range-group"><label>透明度</label><input type="range" id="bg-opacity" min="5" max="50" value="15" oninput="updateBgPreview()"><span id="bg-opacity-val">15%</span></div>
-            <div class="range-group"><label>模糊度</label><input type="range" id="bg-blur" min="0" max="10" value="2" oninput="updateBgPreview()"><span id="bg-blur-val">2px</span></div>
-            <div><button class="btn-primary" onclick="saveBackground()">保存</button><button class="btn-secondary" onclick="closeOverlay('bg-settings-overlay')">取消</button></div>
-        </div>
+        <div class="dialog-box"><h3>🖼️ 聊天背景设置</h3><input type="file" id="bg-file-input" accept="image/*" style="display:none;" onchange="handleBgFileSelect(event)"><div class="bg-preview" id="bg-preview">暂无背景</div><button class="btn-outline" onclick="document.getElementById('bg-file-input').click()">📁 选择图片</button><button class="btn-danger" onclick="removeBackground()" style="margin-left:6px;">移除背景</button><div class="range-group"><label>透明度</label><input type="range" id="bg-opacity" min="5" max="50" value="15" oninput="updateBgPreview()"><span id="bg-opacity-val">15%</span></div><div class="range-group"><label>模糊度</label><input type="range" id="bg-blur" min="0" max="10" value="2" oninput="updateBgPreview()"><span id="bg-blur-val">2px</span></div><div><button class="btn-primary" onclick="saveBackground()">保存</button><button class="btn-secondary" onclick="closeOverlay('bg-settings-overlay')">取消</button></div></div>
     </div>
-    <!-- 弹窗：全局默认值 -->
     <div class="overlay" id="global-defaults-overlay">
-        <div class="dialog-box">
-            <h3>🌐 全局默认值</h3>
-            <h4>默认用户角色卡</h4>
-            <div class="form-group"><label>姓名</label><input id="g-user-name"></div>
-            <div class="form-group"><label>性别</label><input id="g-user-gender"></div>
-            <div class="form-group"><label>年龄</label><input id="g-user-age"></div>
-            <div class="form-group"><label>性格</label><textarea id="g-user-personality"></textarea></div>
-            <div class="form-group"><label>外貌</label><textarea id="g-user-appearance"></textarea></div>
-            <div class="form-group"><label>与AI关系</label><textarea id="g-user-relation"></textarea></div>
-            <div class="form-group"><label>其他</label><textarea id="g-user-extra"></textarea></div>
-            <h4>默认 AI 角色卡</h4>
-            <div class="form-group"><label>姓名</label><input id="g-char-name"></div>
-            <div class="form-group"><label>性别</label><input id="g-char-gender"></div>
-            <div class="form-group"><label>年龄</label><input id="g-char-age"></div>
-            <div class="form-group"><label>性格</label><textarea id="g-char-personality"></textarea></div>
-            <div class="form-group"><label>外貌</label><textarea id="g-char-appearance"></textarea></div>
-            <div class="form-group"><label>感情态度</label><textarea id="g-char-attitude"></textarea></div>
-            <div class="form-group"><label>底线</label><textarea id="g-char-bottom-line"></textarea></div>
-            <div class="form-group"><label>其他</label><textarea id="g-char-extra"></textarea></div>
-            <h4>默认写作要求</h4>
-            <textarea id="g-writing-req" style="width:100%;height:60px;"></textarea>
-            <div><button class="btn-primary" onclick="saveGlobalDefaults()">保存</button><button class="btn-secondary" onclick="closeOverlay('global-defaults-overlay')">取消</button></div>
-        </div>
+        <div class="dialog-box"><h3>🌐 全局默认值</h3><h4>默认用户角色卡</h4><div class="form-group"><label>姓名</label><input id="g-user-name"></div><div class="form-group"><label>性别</label><input id="g-user-gender"></div><div class="form-group"><label>年龄</label><input id="g-user-age"></div><div class="form-group"><label>性格</label><textarea id="g-user-personality"></textarea></div><div class="form-group"><label>外貌</label><textarea id="g-user-appearance"></textarea></div><div class="form-group"><label>与AI关系</label><textarea id="g-user-relation"></textarea></div><div class="form-group"><label>其他</label><textarea id="g-user-extra"></textarea></div><h4>默认 AI 角色卡</h4><div class="form-group"><label>姓名</label><input id="g-char-name"></div><div class="form-group"><label>性别</label><input id="g-char-gender"></div><div class="form-group"><label>年龄</label><input id="g-char-age"></div><div class="form-group"><label>性格</label><textarea id="g-char-personality"></textarea></div><div class="form-group"><label>外貌</label><textarea id="g-char-appearance"></textarea></div><div class="form-group"><label>感情态度</label><textarea id="g-char-attitude"></textarea></div><div class="form-group"><label>底线</label><textarea id="g-char-bottom-line"></textarea></div><div class="form-group"><label>其他</label><textarea id="g-char-extra"></textarea></div><h4>默认写作要求</h4><textarea id="g-writing-req" style="width:100%;height:60px;"></textarea><div><button class="btn-primary" onclick="saveGlobalDefaults()">保存</button><button class="btn-secondary" onclick="closeOverlay('global-defaults-overlay')">取消</button></div></div>
     </div>
-    <!-- 弹窗：API Key -->
     <div class="overlay" id="api-key-overlay">
-        <div class="dialog-box">
-            <h3>🔑 设置 API Key</h3>
-            <input type="password" id="api-key-input" placeholder="sk-..." style="width:100%;padding:10px;margin:10px 0;border:1px solid var(--input-border);border-radius:8px;font-size:14px;background:var(--main-bg);color:var(--text);">
-            <button class="btn-primary" onclick="saveApiKey()">保存</button>
-            <button class="btn-secondary" onclick="closeOverlay('api-key-overlay')">取消</button>
-        </div>
+        <div class="dialog-box"><h3>🔑 设置 API Key</h3><input type="password" id="api-key-input" placeholder="sk-..." style="width:100%;padding:10px;margin:10px 0;border:1px solid var(--input-border);border-radius:8px;font-size:14px;background:var(--main-bg);color:var(--text);"><button class="btn-primary" onclick="saveApiKey()">保存</button><button class="btn-secondary" onclick="closeOverlay('api-key-overlay')">取消</button></div>
     </div>
-    <!-- 弹窗：导出 -->
     <div class="overlay" id="export-overlay">
-        <div class="dialog-box">
-            <h3>📥 导出对话</h3>
-            <button class="btn-outline" onclick="exportChat('txt')" style="display:block;width:100%;margin:6px 0;padding:10px;">📄 纯文本</button>
-            <button class="btn-outline" onclick="exportChat('md')" style="display:block;width:100%;margin:6px 0;padding:10px;">📝 Markdown</button>
-            <button class="btn-outline" onclick="exportChat('json')" style="display:block;width:100%;margin:6px 0;padding:10px;">💾 JSON</button>
-            <button class="btn-outline" onclick="exportChat('html')" style="display:block;width:100%;margin:6px 0;padding:10px;">🌐 HTML</button>
-            <button class="btn-secondary" onclick="closeOverlay('export-overlay')" style="margin-top:8px;">取消</button>
-        </div>
+        <div class="dialog-box"><h3>📥 导出对话</h3><button class="btn-outline" onclick="exportChat('txt')" style="display:block;width:100%;margin:6px 0;padding:10px;">📄 纯文本</button><button class="btn-outline" onclick="exportChat('md')" style="display:block;width:100%;margin:6px 0;padding:10px;">📝 Markdown</button><button class="btn-outline" onclick="exportChat('json')" style="display:block;width:100%;margin:6px 0;padding:10px;">💾 JSON</button><button class="btn-outline" onclick="exportChat('html')" style="display:block;width:100%;margin:6px 0;padding:10px;">🌐 HTML</button><button class="btn-secondary" onclick="closeOverlay('export-overlay')" style="margin-top:8px;">取消</button></div>
     </div>
-    <!-- 弹窗：模板库 -->
     <div class="overlay" id="template-library-overlay">
-        <div class="dialog-box">
-            <h3>📚 角色模板库</h3>
-            <div id="template-list"></div>
-            <button class="btn-secondary" onclick="closeOverlay('template-library-overlay')" style="margin-top:10px;">关闭</button>
-        </div>
+        <div class="dialog-box"><h3>📚 角色模板库</h3><div id="template-list"></div><button class="btn-secondary" onclick="closeOverlay('template-library-overlay')" style="margin-top:10px;">关闭</button></div>
     </div>
-    <!-- 弹窗：群聊管理 -->
     <div class="overlay" id="group-chat-overlay">
-        <div class="dialog-box">
-            <h3>👥 群聊模式设置</h3>
-            <div id="group-role-selection"></div>
-            <div style="margin-top:10px;">
-                <button class="btn-primary" onclick="saveGroupChatSettings()">保存</button>
-                <button class="btn-danger" onclick="disableGroupChat()">切回单角色</button>
-                <button class="btn-secondary" onclick="closeOverlay('group-chat-overlay')">取消</button>
-            </div>
-        </div>
+        <div class="dialog-box"><h3>👥 群聊模式设置</h3><div id="group-role-selection"></div><div style="margin-top:10px;"><button class="btn-primary" onclick="saveGroupChatSettings()">保存</button><button class="btn-danger" onclick="disableGroupChat()">切回单角色</button><button class="btn-secondary" onclick="closeOverlay('group-chat-overlay')">取消</button></div></div>
     </div>
 
     <script>
-        // ===== 数据管理 =====
-        const STORAGE_KEY = 'deepseek_chats_v7';
+        // ==================== 数据管理 ====================
+        const STORAGE_KEY = 'deepseek_chats_v8';
         const API_KEY_STORAGE = 'deepseek_api_key';
         const GLOBAL_DEFAULTS_KEY = 'deepseek_global_defaults_v3';
         const TEMPLATES_KEY = 'deepseek_char_templates';
@@ -541,6 +421,7 @@
                 chatListEl.appendChild(div);
             });
         }
+
         function renderMessages() {
             const chat = getCurrentChat(); chatBoxEl.innerHTML = '';
             if (chat.mode === 'group' && chat.groupCards && chat.groupCards.length > 0) chatTitleEl.textContent = '👥 ' + chat.groupCards.map(c=>c.name||'?').join('、');
@@ -552,20 +433,119 @@
             if (chat.writingRequirement) { writingReqBar.style.display = 'flex'; writingReqText.textContent = chat.writingRequirement; }
             else { writingReqBar.style.display = 'none'; }
             if (chat.messages.length === 0) { chatBoxEl.innerHTML = '<div style="color:var(--text-secondary);text-align:center;margin-top:30px;">开始对话吧</div>'; return; }
-            chat.messages.forEach(msg => {
-                if (msg.role === 'user') addMessageBubble('user', chat.userCard?.name || '我', msg.content, null);
-                else addMessageBubble('assistant', msg.roleName || 'AI', msg.content, msg.color || null);
+            chat.messages.forEach((msg, index) => {
+                if (msg.role === 'user') {
+                    addUserMessageBubble(msg.content, index);
+                } else {
+                    addAssistantMessageBubble(msg.roleName || 'AI', msg.content, msg.color || null, index);
+                }
             });
             scrollToBottom();
         }
-        function addMessageBubble(role, displayName, text, color) {
-            const div = document.createElement('div');
-            div.className = 'msg ' + role; if (color) { div.classList.add('role-bubble'); div.style.borderColor = color; }
-            let html = escapeHtml(text).replace(/\n/g, '<br>');
-            if (role === 'user') div.innerHTML = html;
-            else div.innerHTML = `<strong style="color:${color||'inherit'};">${escapeHtml(displayName)}：</strong>${html}`;
-            chatBoxEl.appendChild(div);
+
+        function addUserMessageBubble(text, index) {
+            const wrapper = document.createElement('div');
+            wrapper.className = 'message-wrapper user-wrapper';
+            wrapper.dataset.msgIndex = index;
+            const bubble = document.createElement('div');
+            bubble.className = 'msg user-msg';
+            bubble.textContent = text;
+            bubble.onclick = function() { startEditUserMessage(index, text, wrapper); };
+
+            const actions = document.createElement('div');
+            actions.className = 'msg-actions';
+            actions.innerHTML = `<button class="msg-action-btn" onclick="startEditUserMessage(${index}, '${escapeHtml(text).replace(/'/g, "\\'")}', this.parentElement.parentElement)">✏️ 编辑</button>`;
+
+            wrapper.appendChild(bubble);
+            wrapper.appendChild(actions);
+            chatBoxEl.appendChild(wrapper);
         }
+
+        function addAssistantMessageBubble(roleName, text, color, index) {
+            const wrapper = document.createElement('div');
+            wrapper.className = 'message-wrapper assistant-wrapper';
+            wrapper.dataset.msgIndex = index;
+            const bubble = document.createElement('div');
+            bubble.className = 'msg assistant-msg';
+            if (color) { bubble.classList.add('role-bubble'); bubble.style.borderColor = color; }
+            let html = `<strong style="color:${color||'inherit'};">${escapeHtml(roleName)}：</strong>${escapeHtml(text).replace(/\n/g, '<br>')}`;
+            bubble.innerHTML = html;
+
+            const actions = document.createElement('div');
+            actions.className = 'msg-actions';
+            actions.innerHTML = `<button class="msg-action-btn" onclick="regenerateAnswer(${index})">🔄 刷新</button>`;
+
+            wrapper.appendChild(bubble);
+            wrapper.appendChild(actions);
+            chatBoxEl.appendChild(wrapper);
+        }
+
+        function startEditUserMessage(index, text, wrapper) {
+            const chat = getCurrentChat();
+            if (index >= chat.messages.length || chat.messages[index].role !== 'user') return;
+            const input = document.createElement('textarea');
+            input.className = 'msg-edit-input';
+            input.value = text;
+            input.rows = Math.min(text.split('\n').length, 6);
+            input.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    finishEditUserMessage(index, input.value, wrapper);
+                }
+                if (e.key === 'Escape') {
+                    renderMessages();
+                }
+            });
+            input.addEventListener('blur', function() {
+                finishEditUserMessage(index, input.value, wrapper);
+            });
+            wrapper.innerHTML = '';
+            wrapper.appendChild(input);
+            input.focus();
+            input.setSelectionRange(input.value.length, input.value.length);
+        }
+
+        async function finishEditUserMessage(index, newText, wrapper) {
+            const chat = getCurrentChat();
+            if (!newText.trim()) { renderMessages(); return; }
+            chat.messages[index].content = newText.trim();
+            // 删除该用户消息之后的所有AI回复
+            chat.messages = chat.messages.slice(0, index + 1);
+            saveData();
+            renderMessages();
+            // 自动请求新的AI回复
+            await regenerateAfterEdit();
+        }
+
+        async function regenerateAfterEdit() {
+            const chat = getCurrentChat();
+            if (chat.messages.length === 0) return;
+            const lastMsg = chat.messages[chat.messages.length - 1];
+            if (lastMsg.role !== 'user') return;
+            // 发送最后一条用户消息获取新回复
+            await sendMessageInternal(lastMsg.content, true);
+        }
+
+        async function regenerateAnswer(index) {
+            const chat = getCurrentChat();
+            if (index >= chat.messages.length) return;
+            const targetMsg = chat.messages[index];
+            if (targetMsg.role !== 'assistant') return;
+            // 找到这条AI回复对应的用户消息
+            let userMsgIndex = index - 1;
+            while (userMsgIndex >= 0 && chat.messages[userMsgIndex].role !== 'user') {
+                userMsgIndex--;
+            }
+            if (userMsgIndex < 0) return;
+            const userMsg = chat.messages[userMsgIndex];
+            // 删除这条AI回复及之后的所有消息
+            chat.messages = chat.messages.slice(0, index);
+            saveData();
+            renderMessages();
+            // 重新发送用户消息
+            await sendMessageInternal(userMsg.content, true);
+        }
+
         function scrollToBottom() { chatBoxEl.scrollTop = chatBoxEl.scrollHeight; }
         function refreshUI() { renderChatList(); renderMessages(); }
         function closeOverlay(id) { document.getElementById(id).style.display = 'none'; }
@@ -573,6 +553,7 @@
         function openSidebar() { document.getElementById('sidebar').classList.add('open'); document.getElementById('sidebar-overlay').classList.add('show'); }
         function closeSidebar() { document.getElementById('sidebar').classList.remove('open'); document.getElementById('sidebar-overlay').classList.remove('show'); }
 
+        // ==================== 以下为所有弹窗功能函数（与之前版本相同） ====================
         function editCurrentUserCard() {
             const chat = getCurrentChat(); const card = chat.userCard || {};
             document.getElementById('user-name').value = card.name || ''; document.getElementById('user-gender').value = card.gender || '';
@@ -708,15 +689,29 @@
 
         async function sendMessage() {
             const content = userInputEl.value.trim(); if (!content) return; if (!apiKey) { showApiKeySetup(); return; }
+            userInputEl.value = ''; userInputEl.style.height = 'auto';
+            await sendMessageInternal(content, false);
+        }
+
+        async function sendMessageInternal(content, isRegeneration) {
             const chat = getCurrentChat();
-            if (chat.messages.length === 0) { chat.title = content.substring(0,15)+(content.length>15?'...':''); renderChatList(); }
-            chat.messages.push({ role: 'user', content: content });
-            addMessageBubble('user', chat.userCard?.name || '我', content, null);
-            userInputEl.value = ''; userInputEl.style.height = 'auto'; scrollToBottom();
+            if (!isRegeneration) {
+                if (chat.messages.length === 0) { chat.title = content.substring(0,15)+(content.length>15?'...':''); renderChatList(); }
+                chat.messages.push({ role: 'user', content: content });
+            }
+            saveData();
+            renderMessages();
+            scrollToBottom();
 
-            const thinkingDiv = document.createElement('div'); thinkingDiv.className = 'msg assistant'; thinkingDiv.textContent = '思考中...'; chatBoxEl.appendChild(thinkingDiv); scrollToBottom();
+            const thinkingDiv = document.createElement('div');
+            thinkingDiv.className = 'msg assistant-msg';
+            thinkingDiv.textContent = '思考中...';
+            thinkingDiv.style.alignSelf = 'flex-start';
+            chatBoxEl.appendChild(thinkingDiv);
+            scrollToBottom();
 
-            const sp = buildSystemPrompt(); let apiMsgs = []; if (sp) apiMsgs.push({ role: 'system', content: sp }); apiMsgs = apiMsgs.concat(chat.messages);
+            const sp = buildSystemPrompt(); let apiMsgs = []; if (sp) apiMsgs.push({ role: 'system', content: sp });
+            apiMsgs = apiMsgs.concat(chat.messages);
             try {
                 const res = await fetch('https://api.deepseek.com/v1/chat/completions', { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${apiKey}` }, body: JSON.stringify({ model: 'deepseek-chat', messages: apiMsgs, stream: false }) });
                 const data = await res.json(); thinkingDiv.remove();
@@ -724,12 +719,14 @@
                     const ac = data.choices[0].message.content;
                     if (chat.mode === 'group' && chat.groupCards && chat.groupCards.length > 0) {
                         const replies = parseGroupReply(ac, chat.groupCards);
-                        if (replies.length > 0) { replies.forEach(r => { chat.messages.push({ role: 'assistant', roleName: r.roleName, content: r.content, color: r.color }); addMessageBubble('assistant', r.roleName, r.content, r.color); }); }
-                        else { chat.messages.push({ role: 'assistant', roleName: '群聊', content: ac, color: '#666' }); addMessageBubble('assistant', '群聊', ac, '#666'); }
-                    } else { chat.messages.push({ role: 'assistant', content: ac }); addMessageBubble('assistant', chat.characterCard?.name || 'AI', ac, null); }
-                } else { const em = '出错：'+JSON.stringify(data); chat.messages.push({ role: 'assistant', content: em }); addMessageBubble('assistant', '系统', em, '#e53935'); }
-            } catch (err) { thinkingDiv.remove(); const em = '网络错误：'+err.message; chat.messages.push({ role: 'assistant', content: em }); addMessageBubble('assistant', '系统', em, '#e53935'); }
-            saveData(); scrollToBottom();
+                        if (replies.length > 0) { replies.forEach(r => { chat.messages.push({ role: 'assistant', roleName: r.roleName, content: r.content, color: r.color }); }); }
+                        else { chat.messages.push({ role: 'assistant', roleName: '群聊', content: ac, color: '#666' }); }
+                    } else { chat.messages.push({ role: 'assistant', content: ac }); }
+                } else { chat.messages.push({ role: 'assistant', content: '出错：'+JSON.stringify(data) }); }
+            } catch (err) { thinkingDiv.remove(); chat.messages.push({ role: 'assistant', content: '网络错误：'+err.message }); }
+            saveData();
+            renderMessages();
+            scrollToBottom();
         }
 
         userInputEl.addEventListener('input', function() { this.style.height = 'auto'; this.style.height = Math.min(this.scrollHeight, 100) + 'px'; });
